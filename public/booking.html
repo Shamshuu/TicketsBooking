@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Seats</title>
+  <link rel="stylesheet" href="TicketsStyles.css">
+</head>
+<body>
+    <header>
+        <div class="logo-wrapper">
+            <div class="logo-container">
+                <img src="[CITYPNG.COM]Outline White Ticket Icon FREE PNG - 2000x2000.png" alt="Logo" class="logo-icon">
+            </div>
+            <h2>Tickets</h2>
+        </div>
+        <button id="backLink" class="nav-link" type="button">
+            <h3 id="backText">Back</h3>
+        </button>
+    </header>
+
+    <div class="booking-container">
+        <div class="tickets">
+            <div class="ticket-selector">
+                <div class="title" id="bookingTitle">
+                    booking details
+                </div>
+                <div class="seats">
+                    <div class="status">
+                        <div class="item">Available</div>
+                        <div class="item">Selected</div>
+                        <div class="item">Booked</div>
+                    </div>
+                    <div class="timings">
+                        <div class="dates">
+                            <input type="radio" name="date" id="d1" checked>
+                            <label for="d1" class="dates-item">
+                                <div class="day">Fri</div>
+                                <div class="date">12</div>
+                            </label>
+                            <input type="radio" name="date" id="d2">
+                            <label for="d2" class="dates-item">
+                                <div class="day">Sat</div>
+                                <div class="date">13</div>
+                            </label>
+                            <input type="radio" name="date" id="d3">
+                            <label for="d3" class="dates-item">
+                                <div class="day">Sun</div>
+                                <div class="date">14</div>
+                            </label>
+                            <input type="radio" name="date" id="d4">
+                            <label for="d4" class="dates-item">
+                                <div class="day">Mon</div>
+                                <div class="date">15</div>
+                            </label>
+                            <input type="radio" name="date" id="d5">
+                            <label for="d5" class="dates-item">
+                                <div class="day">Tue</div>
+                                <div class="date">16</div>
+                            </label>
+                            <input type="radio" name="date" id="d6">
+                            <label for="d6" class="dates-item">
+                                <div class="day">Wed</div>
+                                <div class="date">17</div>
+                            </label>
+                            <input type="radio" name="date" id="d7">
+                            <label for="d7" class="dates-item">
+                                <div class="day">Thu</div>
+                                <div class="date">18</div>
+                            </label>
+                        </div>
+                        <div class="times">
+                            <input type="radio" name="time" id="t1" checked>
+                            <label for="t1" class="time">11:00</label>
+                            <input type="radio" name="time" id="t2">
+                            <label for="t2" class="time">14:30</label>
+                            <input type="radio" name="time" id="t3">
+                            <label for="t3" class="time">18:30</label>
+                            <input type="radio" name="time" id="t4">
+                            <label for="t4" class="time">21:30</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="screenBar">This Way Screen</div>
+                <div class="all-seats">
+                    <input type="checkbox" name="tickets" id="s1">
+                    <label for="s1" class="seat booked"></label>
+                </div>
+            </div>
+            <div class="price">
+                <div class="total">
+                    <span><span class="count">0</span> Tickets</span>
+                    <div>₹ <span class="amount">0</span></div>
+                </div>
+                <button type="button" id="bookButton" disabled>Book</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="ticketModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); z-index:3000; align-items:center; justify-content:center; font-weight: lighter;">
+      <div id="ticketContent" style="background:#fff; border-radius:16px; padding:32px 40px; min-width:400px; max-width:95vw; box-shadow:0 8px 32px rgba(0,0,0,0.25); position:relative; display:flex; flex-direction:column; align-items:center;">
+        <button id="closeTicketModal" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:28px; color:#333; cursor:pointer; transition:color 0.2s ease;" onmouseover="this.style.color='#ff0000'" onmouseout="this.style.color='#333'">&times;</button>
+        <div id="ticketDetails" style="display:flex; gap:30px; margin-bottom:30px; position:relative;">
+          <div style="flex-shrink:0;">
+            <img src="" alt="movie poster" style="width:160px; border-radius:4px; box-shadow:0 4px 12px #0003;">
+          </div>
+          <div style="position:relative; flex:1; min-width:0; padding-left:30px;">
+            <div style="position:absolute; left:0; top:0; bottom:0; width:1px; border-left:2px dotted #ccc; border-radius:1px;"></div>
+            <div style="padding-left:20px; font-weight: lighter;">
+              <h2 style="margin:0 0 16px 0; color:#0d1333; font-size:22px;">Movie Title</h2>
+              <div style="font-size:16px; color:#555; margin-bottom:12px; line-height:1.5;"><b>Theater:</b> Theater Name</div>
+              <div style="font-size:16px; color:#555; margin-bottom:12px; line-height:1.5;"><b>Screen:</b> Screen Name</div>
+              <div style="font-size:16px; color:#555; margin-bottom:12px; line-height:1.5;"><b>Seats:</b> Seat Numbers</div>
+              <div style="font-size:16px; color:#555; margin-bottom:12px; line-height:1.5;"><b>Date:</b> Saturday, 21/09/2024</div>
+              <div style="font-size:16px; color:#555; margin-bottom:12px; line-height:1.5;"><b>Show Time:</b> 14:30</div>
+            </div>
+          </div>
+        </div>
+        <button id="downloadTicketBtn" class="ticket-download-btn">Download Ticket as Image</button>
+      </div>
+    </div>
+
+    <script>
+        if (localStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'Tickets.html?loginPrompt=1';
+        } else {
+            const seatsContainer = document.querySelector(".all-seats");
+            const amountEl = document.querySelector(".amount");
+            const countEl = document.querySelector(".count");
+            const backLink = document.getElementById('backLink');
+            const backText = document.getElementById('backText');
+            const bookingTitle = document.getElementById("bookingTitle");
+            const bookButton = document.getElementById("bookButton");
+
+            const rows = 12;
+            const cols = 16;
+            const seatLabels = [];
+            let bookedSeats = [];
+
+            // Get URL parameters
+            const params = new URLSearchParams(window.location.search);
+            const movie = params.get("movie") || "Movie";
+            const theater = params.get("theater") || "Theater";
+            const screen = params.get("screen") || "Screen 1";
+            const source = (params.get('source') || '').toLowerCase();
+            const poster = params.get("poster") || "posters/fallback.jpg";
+
+            // --- Dynamic Dates and Times ---
+            const showtimes = ["11:00", "14:30", "18:30", "21:30"];
+            const datesContainer = document.createElement('div');
+            datesContainer.className = 'dates';
+            const timesContainer = document.createElement('div');
+            timesContainer.className = 'times';
+            // Replace static HTML with dynamic containers
+            document.querySelector('.timings').innerHTML = '';
+            document.querySelector('.timings').appendChild(datesContainer);
+            document.querySelector('.timings').appendChild(timesContainer);
+
+            function pad(n) { return n < 10 ? '0' + n : n; }
+            function getDayShort(date) {
+                return date.toLocaleDateString(undefined, { weekday: 'short' });
+            }
+            function getDateNum(date) {
+                return date.getDate();
+            }
+            function renderDates() {
+                datesContainer.innerHTML = '';
+                const now = new Date();
+                // Determine if today should be skipped
+                const lastShow = new Date(now);
+                lastShow.setHours(21, 30, 0, 0); // 21:30
+                let startOffset = 0;
+                if (now > lastShow) {
+                    startOffset = 1; // Skip today
+                }
+                for (let i = 0; i < 7; i++) {
+                    const d = new Date(now);
+                    d.setDate(now.getDate() + i + startOffset);
+                    const id = `d${i+1}`;
+                    const checked = i === 0 ? 'checked' : '';
+                    datesContainer.insertAdjacentHTML('beforeend', `
+                        <input type="radio" name="date" id="${id}" ${checked}>
+                        <label for="${id}" class="dates-item">
+                            <div class="day">${getDayShort(d)}</div>
+                            <div class="date">${getDateNum(d)}</div>
+                        </label>
+                    `);
+                }
+            }
+            function renderTimes() {
+                timesContainer.innerHTML = '';
+                // Find selected date
+                const dateInputs = datesContainer.querySelectorAll('input[name="date"]');
+                let selectedIdx = 0;
+                dateInputs.forEach((input, idx) => { if (input.checked) selectedIdx = idx; });
+                const now = new Date();
+                // Figure out the actual date for the selected index
+                const lastShow = new Date(now);
+                lastShow.setHours(21, 30, 0, 0);
+                let startOffset = 0;
+                if (now > lastShow) startOffset = 1;
+                const selectedDate = new Date(now);
+                selectedDate.setDate(now.getDate() + selectedIdx + startOffset);
+                const isToday = selectedIdx === 0 && startOffset === 0;
+                showtimes.forEach((time, i) => {
+                    // Parse showtime as today
+                    const [h, m] = time.split(':');
+                    const showDate = new Date(selectedDate);
+                    showDate.setHours(+h, +m, 0, 0);
+                    let disabled = false;
+                    if (isToday && showDate <= now) disabled = true;
+                    const id = `t${i+1}`;
+                    const checked = !disabled && timesContainer.querySelectorAll('input:checked').length === 0 ? 'checked' : '';
+                    timesContainer.insertAdjacentHTML('beforeend', `
+                        <input type="radio" name="time" id="${id}" ${disabled ? 'disabled' : ''} ${checked}>
+                        <label for="${id}" class="time ${disabled ? 'disabled' : ''}">${time}</label>
+                    `);
+                });
+            }
+            // --- END Dynamic Dates and Times ---
+
+            async function fetchBookedSeats() {
+                // Get selected date and time
+                const dateInput = datesContainer.querySelector('input[name="date"]:checked');
+                const timeInput = timesContainer.querySelector('input[name="time"]:checked');
+                if (!dateInput || !timeInput) { bookedSeats = []; return; }
+                const dateLabel = dateInput.nextElementSibling;
+                const timeLabel = timeInput.nextElementSibling;
+                const day = dateLabel ? dateLabel.querySelector('.day').textContent : '';
+                const dateNum = dateLabel ? dateLabel.querySelector('.date').textContent : '';
+                // Build date string (YYYY-MM-DD)
+                const today = new Date();
+                const lastShow = new Date(today);
+                lastShow.setHours(21, 30, 0, 0);
+                let startOffset = 0;
+                if (today > lastShow) startOffset = 1;
+                let selectedIdx = Array.from(datesContainer.querySelectorAll('input[name="date"]')).findIndex(i => i.checked);
+                const showDate = new Date(today);
+                showDate.setDate(today.getDate() + selectedIdx + startOffset);
+                const yyyy = showDate.getFullYear();
+                const mm = pad(showDate.getMonth() + 1);
+                const dd = pad(showDate.getDate());
+                const dateStr = `${yyyy}-${mm}-${dd}`;
+                const timeStr = timeLabel ? timeLabel.textContent : '';
+                
+                console.log('Fetching booked seats for:', { theater, movie, screen, date: dateStr, time: timeStr });
+                
+                try {
+                    const res = await fetch(`/api/bookings/booked-seats?theater=${encodeURIComponent(theater)}&movie=${encodeURIComponent(movie)}&screen=${encodeURIComponent(screen)}&date=${dateStr}&time=${encodeURIComponent(timeStr)}`);
+                    const data = await res.json();
+                    bookedSeats = Array.isArray(data.seats) ? data.seats : [];
+                    console.log('Fetched booked seats:', bookedSeats);
+                } catch (err) {
+                    console.error('Error fetching booked seats:', err);
+                    bookedSeats = [];
+                }
+            }
+
+            async function renderSeats() {
+                await fetchBookedSeats();
+                seatsContainer.innerHTML = "";
+                for (let r = rows - 1; r >= 0; r--) {
+                    const rowLabel = String.fromCharCode(65 + r);
+                    for (let c = 1; c <= cols; c++) {
+                        const seatId = `${rowLabel}${c}`;
+                        const isGapBefore = rowLabel !== 'A' && c === 8;
+                        seatLabels.push(seatId);
+                        const isBooked = bookedSeats.includes(seatId);
+                        seatsContainer.insertAdjacentHTML(
+                            "beforeend",
+                            `<input type="checkbox" name="tickets" id="${seatId}" ${isBooked ? 'disabled' : ''}>
+                            <label for="${seatId}" class="seat ${isGapBefore ? 'gap-left' : ''} ${isBooked ? 'booked' : ''}">${seatId}</label>`
+                        );
+                    }
+                }
+                attachPriceListeners();
+            }
+
+            function attachPriceListeners() {
+                const tickets = seatsContainer.querySelectorAll("input");
+                amountEl.textContent = "0";
+                countEl.textContent = "0";
+                
+                tickets.forEach((ticket) => {
+                    ticket.addEventListener("change", () => {
+                        let amount = Number(amountEl.textContent);
+                        let count = Number(countEl.textContent);
+
+                        if (ticket.checked) {
+                            count++;
+                            amount += 200;
+                        } else {
+                            count--;
+                            amount -= 200;
+                        }
+                        amountEl.textContent = amount;
+                        countEl.textContent = count;
+                        
+                        // Enable/disable book button based on selection
+                        bookButton.disabled = count === 0;
+                        // Enforce max 6 seats
+                        if (count > 6) {
+                            ticket.checked = false;
+                            amountEl.textContent = amount - 200;
+                            countEl.textContent = count - 1;
+                            bookButton.disabled = false;
+                            alert('You can only book up to 6 seats at a time.');
+                        }
+                    });
+                });
+                seatsContainer.scrollTop = seatsContainer.scrollHeight;
+            }
+
+            // Set up back navigation
+            function setupBackNavigation() {
+                console.log('Source parameter:', source); // Debug log
+    
+                if (source === 'theaters' || source.includes('theaters')) {
+                    backText.textContent = 'Back to Theaters';
+                    backLink.addEventListener('click', () => {
+                        window.location.href = 'Tickets.html?section=theaters';
+                    });
+                } else {
+                    backText.textContent = 'Back to Movies';
+                    backLink.addEventListener('click', () => {
+                        window.location.href = 'Tickets.html?section=movies';
+                    });
+                }
+            }
+
+            // Set booking title
+            function setupBookingTitle() {
+                if (movie && theater) {
+                    bookingTitle.textContent = `Booking for ${decodeURIComponent(movie)} at ${decodeURIComponent(theater)}`;
+                } else {
+                    bookingTitle.textContent = 'Booking Details';
+                }
+            }
+
+            // Handle seat re-rendering when date/time changes
+            function setupDateTimeListeners() {
+                datesContainer.addEventListener('change', () => {
+                    renderTimes();
+                        renderSeats();
+                    });
+                timesContainer.addEventListener('change', () => {
+                    renderSeats();
+                });
+            }
+
+            // Show ticket modal after successful booking
+            function showTicketModal({ movie, poster, theater, screen, seats, showDate, time }) {
+                const ticketModal = document.getElementById('ticketModal');
+                const ticketDetails = document.getElementById('ticketDetails');
+
+                const formattedDate = showDate.toLocaleDateString('en-GB', {
+                    weekday: 'long',
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                });
+
+                // Calculate total price (₹200 per seat)
+                const totalPrice = seats.length * 200;
+
+                ticketDetails.innerHTML = `
+                    <div style="flex-shrink:0;">
+                        <img src="${poster}" alt="${movie} poster" style="width:160px; border-radius:4px; box-shadow:0 4px 12px #0003;">
+                    </div>
+                    <div style="position:relative; flex:1; min-width:0; padding-left:30px;">
+                        <div style="position:absolute; left:0; top:0; bottom:0; width:1px; border-left:2px dotted #ccc; border-radius:1px;"></div>
+                        <div style="padding-left:20px;">
+                           <h2 style="margin:0 0 16px 0; color:#0d1333; font-size:22px; font-weight:600;">${movie}</h2>
+                           <div style="font-size:16px; color:#555; margin-bottom:12px; line-height:1.5;"><b>Theater:</b> ${theater}</div>
+                           <div style="font-size:16px; color:#555; margin-bottom:12px; line-height:1.5;"><b>Screen:</b> ${screen}</div>
+                           <div style="font-size:16px; color:#555; margin-bottom:12px; line-height:1.5;"><b>Seats:</b> ${seats.join(', ')}</div>
+                           <div style="font-size:16px; color:#555; margin-bottom:12px; line-height:1.5;"><b>Date:</b> ${formattedDate}</div>
+                           <div style="font-size:16px; color:#555; margin-bottom:12px; line-height:1.5;"><b>Show Time:</b> ${time}</div>
+                           <div style="font-size:16px; color:#555; margin-bottom:12px; line-height:1.5;"><b>Total Price:</b> ₹${totalPrice}</div>
+                         </div>
+                    </div>
+                `;
+                ticketModal.style.display = 'flex';
+                
+                // Download as image
+                document.getElementById('downloadTicketBtn').onclick = () => {
+                    downloadTicketAsImage({
+                        movie,
+                        posterUrl: poster,
+                        theater,
+                        screen,
+                        seats: seats.join(', '),
+                        date: formattedDate,
+                        time,
+                        totalPrice
+                    });
+                    ticketModal.style.display = 'none';
+                    setTimeout(() => { window.location.href = 'Tickets.html'; }, 300);
+                };
+                
+                // Close modal
+                document.getElementById('closeTicketModal').onclick = () => {
+                    ticketModal.style.display = 'none';
+                    setTimeout(() => { window.location.href = 'Tickets.html'; }, 300);
+                };
+            }
+
+            // Handle book button click
+            function setupBookButton() {
+                bookButton.addEventListener('click', async () => {
+                    const selectedSeats = Array.from(seatsContainer.querySelectorAll('input:checked'))
+                        .map(seat => seat.id);
+                    const totalAmount = Number(amountEl.textContent);
+                    const totalCount = Number(countEl.textContent);
+
+                    if (totalCount === 0) {
+                        alert('Please select at least one seat.');
+                        return;
+                    }
+                    if (totalCount > 6) {
+                        alert('You can only book up to 6 seats at a time.');
+                        return;
+                    }
+
+                    // Get selected date and time
+                    const selectedDateInput = datesContainer.querySelector('input[name="date"]:checked');
+                    const selectedTime = timesContainer.querySelector('input[name="time"]:checked');
+                    const timeLabel = selectedTime ? selectedTime.nextElementSibling : null;
+                    const time = timeLabel ? timeLabel.textContent : '';
+                    
+                    // Reconstruct the full date object
+                    const today = new Date();
+                    const lastShow = new Date(today);
+                    lastShow.setHours(21, 30, 0, 0);
+                    let startOffset = 0;
+                    if (today > lastShow) startOffset = 1;
+                    let selectedIdx = Array.from(datesContainer.querySelectorAll('input[name="date"]')).findIndex(i => i.checked);
+                    const showDate = new Date(today);
+                    showDate.setDate(today.getDate() + selectedIdx + startOffset);
+
+                    // Format date as YYYY-MM-DD for API
+                    const yyyy = showDate.getFullYear();
+                    const mm = pad(showDate.getMonth() + 1);
+                    const dd = pad(showDate.getDate());
+                    const dateStr = `${yyyy}-${mm}-${dd}`;
+
+                    // Disable book button to prevent double-clicking
+                    bookButton.disabled = true;
+                    bookButton.textContent = 'Booking...';
+
+                    try {
+                        // Make API call to save booking
+                        const token = localStorage.getItem('token');
+                        if (!token) {
+                            alert('Please log in to book tickets.');
+                            window.location.href = 'Tickets.html?loginPrompt=1';
+                            return;
+                        }
+
+                        const bookingData = {
+                            theater: decodeURIComponent(theater),
+                            movie: decodeURIComponent(movie),
+                            screen: decodeURIComponent(screen),
+                            date: dateStr,
+                            time: time,
+                            seats: selectedSeats
+                        };
+
+                        console.log('Sending booking request:', bookingData);
+
+                        const response = await fetch('/api/bookings', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify(bookingData)
+                        });
+
+                        console.log('Booking response status:', response.status);
+                        const data = await response.json();
+                        console.log('Booking response data:', data);
+
+                        if (response.ok) {
+                            // Booking successful - show ticket modal
+                            const posterUrl = decodeURIComponent(poster);
+                            showTicketModal({
+                                movie: decodeURIComponent(movie),
+                                poster: posterUrl,
+                                theater: decodeURIComponent(theater),
+                                screen: decodeURIComponent(screen),
+                                seats: selectedSeats,
+                                showDate: showDate,
+                                time: time
+                            });
+                            // Refresh seats to show newly booked seats
+                            renderSeats();
+                        } else {
+                            // Booking failed
+                            alert(data.msg || 'Booking failed. Please try again.');
+                            // Re-enable book button
+                            bookButton.disabled = false;
+                            bookButton.textContent = 'Book';
+                        }
+                    } catch (error) {
+                        console.error('Booking error:', error);
+                        alert('Network error. Please check your connection and try again.');
+                        // Re-enable book button
+                        bookButton.disabled = false;
+                        bookButton.textContent = 'Book';
+                    }
+                });
+            }
+
+            // Initialize everything when DOM is loaded
+            document.addEventListener('DOMContentLoaded', () => {
+                setupBackNavigation();
+                setupBookingTitle();
+                renderDates();
+                renderTimes();
+                setupDateTimeListeners();
+                setupBookButton();
+                renderSeats();
+            });
+
+            // Handle browser back button
+            window.addEventListener('popstate', () => {
+                if (source.includes('theaters') || source === 'theaters') {
+                    window.location.href = 'Tickets.html#theaters';
+                } else {
+                    window.location.href = 'Tickets.html#movies';
+                }
+            });
+
+            // Prevent form submission on enter key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && e.target.type !== 'button') {
+                    e.preventDefault();
+                }
+            });
+        }
+    </script>
+    <script src="ticket-utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</body>
+</html>

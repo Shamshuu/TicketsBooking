@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Tickets</title>
+    <link rel="stylesheet" href="TicketsStyles.css">
+</head>
+<body>
+    <div id="sideMenuOverlay" class="side-menu-overlay"></div>
+    <div id="sideMenu" class="side-menu">
+        <div class="side-menu-content">
+            <div id="authItem">Login / Signup</div>
+            <div id="aboutSection" class="about-section" style="display: none;">
+                <h4>About</h4>
+                <div class="orders-area">
+                    <h5>Orders</h5>
+                    <div id="ordersList">No orders yet.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="logo-wrapper">
+            <div class="logo-container">
+                <img src="[CITYPNG.COM]Outline White Ticket Icon FREE PNG - 2000x2000.png" alt="logo" class="logo-icon" id="logoIcon">
+                <div class="x-mark" id="xMark">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <h2>TICKETS</h2>
+        </div>
+        
+        <div class="nav-links">
+            <div class="nav-link" id="browseMoviesLink">
+                <h3>Browse by movies</h3>
+            </div>
+    
+            <div class="divider"></div>
+    
+            <div class="nav-link" id="browseTheatersLink">
+                <h3>Browse by theaters</h3>
+            </div>
+        </div>
+
+        <div class="location-wrapper" id="locationWrapper">
+           <span class="location-name" id="selectedCity">Select city</span>
+            <img src="map-mark.png" alt="Select location" class="location-icon" id="locationIconImg">
+            <div class="dropdown-menu" id="dropdownMenu">
+                <input type="text" placeholder="Search city" id="searchInput">
+                <div id="cityList"></div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div id="moviesContent" class="content-section">
+            <h2>Movies Listing</h2>
+            <div id="moviesList" class="content-list movies-content-list"></div>
+        </div>
+
+        <div id="theatersContent" class="content-section hidden">
+            <h2>Theaters Listing</h2>
+            <div id="theatersList" class="content-list theaters-content-list"></div>
+        </div>
+
+        <div id="modalOverlay" class="modal-overlay hidden">
+            <div id="modalContent" class="modal-content">
+                <span id="closeModal" class="close-btn">&times;</span>
+                <div id="modalDetails"></div>
+            </div>
+        </div>
+
+        <!-- Bookings Modal -->
+        <div id="bookingsModalOverlay" class="modal-overlay hidden">
+            <div id="bookingsModalContent" class="modal-content bookings-modal-content">
+                <span id="closeBookingsModal" class="close-btn">&times;</span>
+                <div id="bookingsModalDetails"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="auth-modal">
+        <div class="auth-modal-content">
+            <div class="auth-modal-header">
+                <h2>Welcome</h2>
+                <button id="closeAuthModal" class="close-auth-modal">&times;</button>
+            </div>
+            <div class="auth-toggle">
+                <div id="loginTab" class="auth-tab active">Login</div>
+                <div id="signupTab" class="auth-tab">Sign Up</div>
+            </div>
+            <div class="auth-modal-body">
+                <form id="loginForm" class="auth-form active">
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit">Log In</button>
+                    <div class="auth-error"></div>
+                </form>
+                <form id="signupForm" class="auth-form">
+                    <input type="text" placeholder="Full Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <input type="password" placeholder="Confirm Password" required>
+                    <button type="submit">Sign Up</button>
+                    <div class="auth-error"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="loginPromptPopup" class="login-prompt-popup" style="display:none;">
+      <div class="login-prompt-content">
+        <span id="closeLoginPrompt" class="login-prompt-close">&times;</span>
+        <div class="login-prompt-message">Please log in first to book tickets.</div>
+        <button id="openAuthModalFromPrompt" class="login-prompt-btn">Log In / Sign Up</button>
+      </div>
+    </div>
+
+    <div id="adminMovieModal" class="admin-modal">
+      <div class="admin-modal-content">
+        <div class="admin-modal-header">
+          <h2>Add Movie</h2>
+          <button id="closeMovieModal" class="admin-close-btn">&times;</button>
+        </div>
+        <form id="adminMovieForm" class="admin-form">
+          <div class="admin-form-group">
+            <label for="movieTitle">Title</label>
+            <input type="text" id="movieTitle" required>
+          </div>
+          <div class="admin-form-group">
+            <label for="movieSynopsis">Synopsis</label>
+            <textarea id="movieSynopsis" required></textarea>
+          </div>
+          <div class="admin-form-group">
+            <label for="moviePrice">Price</label>
+            <input type="number" id="moviePrice" min="0" required>
+          </div>
+          <div class="admin-form-group">
+            <label for="movieStartDate">Start Date</label>
+            <input type="date" id="movieStartDate" required>
+          </div>
+          <div class="admin-form-group">
+            <label for="movieEndDate">End Date</label>
+            <input type="date" id="movieEndDate" required>
+          </div>
+          <div class="admin-form-group admin-file-input">
+            <input type="file" id="moviePoster" accept="image/jpeg,image/jpg,image/png" required>
+            <label for="moviePoster" class="admin-file-label">Choose JPG file or drag here</label>
+          </div>
+          <button type="submit" class="admin-submit-btn">Add Movie</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="adminTheaterModal" class="admin-modal">
+      <div class="admin-modal-content">
+        <div class="admin-modal-header">
+          <h2>Add Theater</h2>
+          <button id="closeTheaterModal" class="admin-close-btn">&times;</button>
+        </div>
+        <form id="adminTheaterForm" class="admin-form">
+          <div class="admin-form-group">
+            <label for="theaterName">Name</label>
+            <input type="text" id="theaterName" required>
+          </div>
+          <div class="admin-form-group">
+            <label for="theaterAddress">Address</label>
+            <input type="text" id="theaterAddress" required>
+          </div>
+          <div class="admin-form-group">
+            <label for="theaterPrice">Price</label>
+            <input type="number" id="theaterPrice" min="0" required>
+          </div>
+          <div class="admin-form-group admin-file-input">
+            <input type="file" id="theaterPhoto" name="photo" accept="image/jpeg,image/jpg,image/png" required>
+            <label for="theaterPhoto" class="admin-file-label">Choose JPG file or drag here</label>
+          </div>
+          <button type="submit" class="admin-submit-btn">Add Theater</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="adminConfirmModal" class="admin-confirm-modal">
+      <div class="admin-confirm-content">
+        <h3 id="adminConfirmTitle">Confirm</h3>
+        <p id="adminConfirmMessage">Are you sure?</p>
+        <div class="admin-confirm-buttons">
+          <button id="adminConfirmYes" class="admin-confirm-btn admin-confirm-yes">Yes</button>
+          <button id="adminConfirmNo" class="admin-confirm-btn admin-confirm-no">No</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Generic Admin Edit Modal (reusable for all edit/add actions) -->
+    <div id="adminEditModal" class="admin-modal">
+      <div class="admin-modal-content">
+        <div class="admin-modal-header">
+          <h2 id="adminEditModalTitle">Edit</h2>
+          <button id="closeAdminEditModal" class="admin-close-btn">&times;</button>
+        </div>
+        <form id="adminEditForm" class="admin-form">
+          <div id="adminEditFormFields"></div>
+          <div class="admin-modal-actions">
+            <button type="submit" class="admin-submit-btn">Save</button>
+            <button type="button" id="adminEditDeleteBtn" class="admin-delete-btn" style="display:none;">Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="ticket-utils.js"></script>
+    <script src="Ticketscript.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login / Sign Up</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .form-box { max-width: 300px; margin: auto; padding: 20px; border: 1px solid #ccc; }
+    input { width: 100%; padding: 8px; margin: 8px 0; justify-content: center;}
+    button { width: 100%; padding: 10px; background: navy; color: white; border: none; }
+    .switch { text-align: center; margin-top: 10px; cursor: pointer; color: blue; }
+  </style>
+</head>
+<body>
+  <div class="form-box" id="loginForm">
+    <h2>Login</h2>
+    <input type="text" id="loginUsername" placeholder="Username" required>
+    <input type="password" id="loginPassword" placeholder="Password" required>
+    <button onclick="login()">Login</button>
+    <div class="switch" onclick="toggleForm()">Don't have an account? Sign up</div>
+  </div>
+
+  <div class="form-box" id="signupForm" style="display:none">
+    <h2>Sign Up</h2>
+    <input type="text" id="signupUsername" placeholder="Username" required>
+    <input type="password" id="signupPassword" placeholder="Password" required>
+    <button onclick="signup()">Sign Up</button>
+    <div class="switch" onclick="toggleForm()">Already have an account? Log in</div>
+  </div>
+
+  <script>
+    function signup() {
+  const username = document.getElementById('signupUsername').value;
+  const password = document.getElementById('signupPassword').value;
+
+  fetch('/api/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.error) alert(data.error);
+      else {
+        alert('Signup successful! Please log in.');
+        toggleForm();
+      }
+    });
+}
+
+function login() {
+  const username = document.getElementById('loginUsername').value;
+  const password = document.getElementById('loginPassword').value;
+
+  fetch('/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.error) alert(data.error);
+      else {
+        sessionStorage.setItem('loggedInUser', username);
+        alert('Login successful');
+        window.location.href = 'Tickets.html';
+      }
+    });
+}
+  </script>
+</body>
+</html>
